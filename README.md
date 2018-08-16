@@ -1,5 +1,5 @@
 # Calc
-Calculate expression from a string. Example: `1 + 2 * sin(3 * pi / 2)`
+Calculate value from a string. Example: `1 + 2 * sin(3 * pi / 2)`
 
 ## Features
 - Operators: `+`, `-`, `*`, `/`
