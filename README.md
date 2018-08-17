@@ -1,20 +1,24 @@
 # Calc
-Calculate value from a string. Example: `1 + 2 * sin(3 * pi / 2)`
+## Introduction
+This library provides an easy and effecient way to calculate the result of an
+expression. E.g. this line prints 7
+```printf("%f\n", calc("1 + 2 * 3", NULL, NULL, NULL));```
 
 ## Features
-- Operators: `+`, `-`, `*`, `/`
+- Operators: <tt>+ - * /</tt>
 - Functions
 - Variables
 - Error Handling
 
-## Calc Function
-```
-double calc(const char* string, CalcVariableCallback var, CalcFunctionCallback func, CalcError* error);
-```
+## Building
+The library can be built using CMake. It can only be built as a static library.
+If *CALC_BUILD_EXAMPLE* is enabled the example is included.
 
-| Parameter | Description |
-|-----------|-----|
-| string    | Expression as a string |
-| var       | Callback when variable is encountered, can be null |
-| func      | Callback when function is encountered, can be null |
-| error     | Pointer to CalcError struct, only modified on error, can be null |
+## Installation
+This library provides a CMake file which can be used to build it and install it
+on your system. It can be included in any CMake project with
+<tt>find_package(Calc)</tt> after installing it. You can however also copy the
+files into your project.
+
+## Usage
+See [Calc.h (Doxygen)](https://www.preinfalk.co.at/projects/Calc/_calc_8h.html)
