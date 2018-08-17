@@ -82,17 +82,40 @@ typedef double (*CalcFunctionCallback)(const char* name, uint32_t length, double
  * This function uses a recursive decent parser to determine the value. The
  * expressions are C-like. The following operators are built in: + - * /. Plus
  * and minus also act as sign for numbers. The multiply and divide operator
- * have a lower precedence than the addition and subtraction ones.
+ * have a lower precedence than the addition and subtraction ones. E.g.
+ *
+ * - <tt>1 + 2 * 3</tt>
+ * - <tt>1 + 2 * sin(2 * pi / 3)</tt>
+ * - <tt>atan2(1, 2)</tt>
+ * - <tt>(1 + 2) * 3</tt>
  *
  * There are no inbuilt variables or functions. Everything is forwarded to the
  * calback functions. If the corresponding callback function is <tt>NULL</tt>
  * the function fails with an error. If \a error is set to <tt>NULL</tt>, it is
  * ignored.
  *
+ * To check if an error happened you can use the \a error parameter. Because
+ * the struct is only modified on errors you can set either the \a message or
+ * the \a position member to <tt>NULL</tt> and check afterwards if it still has
+ * the same value. E.g.
+ *
+ * \code{.c}
+ * CalcError error { NULL };
+ * calc("...", NULL, NULL, &error);
+ *
+ * if (error.message) {
+ *   // Error
+ * }
+ * else {
+ *   // Success
+ * }
+ * \endcode
+ *
  * \param string Null-terminated string with expression
- * \param var Variable callback. It can be NULL.
- * \param func Function callback. It can be NULL.
- * \param error Error struct. It can be NULL.
+ * \param var Variable callback. It can be <tt>NULL</tt>.
+ * \param func Function callback. It can be <tt>NULL</tt>.
+ * \param error Error struct. It can be <tt>NULL</tt> and will only be modified on
+ * error.
  * \return Result or 0.0 on error
  */
 
